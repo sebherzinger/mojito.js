@@ -8,6 +8,7 @@ var util = require('gulp-util');
 var size = require('gulp-size');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
+var babel = require('gulp-babel');
 
 gulp.task('bundle', function () {
     var bundle = browserify({

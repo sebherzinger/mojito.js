@@ -173,6 +173,11 @@ describe('Utils', function() {
             expect(Utils.isString(undefined)).to.equal(false);
         });
     });
+    describe('isFunction', function() {
+        it('should return true if param is a function', function () {
+            expect(Utils.isFunction(function(){})).to.equal(true);
+        });
+    });
     describe('isEmpty', function() {
         it('should be true if object has no keys', function () {
             expect(Utils.isEmpty({})).to.equal(true);
@@ -187,10 +192,78 @@ describe('Utils', function() {
             expect(Utils.isEmpty(["as"])).to.equal(false);
         });
         it('should be true if string has no chars', function () {
-            expect(Utils.isEmpty("")).to.equal(false);
+            expect(Utils.isEmpty("")).to.equal(true);
         });
         it('should be false if string has at least one char', function () {
-            expect(Utils.isEmpty("a")).to.equal(true);
+            expect(Utils.isEmpty("a")).to.equal(false);
+        });
+        it('should be false if 1 (int)', function () {
+            expect(Utils.isEmpty(1)).to.equal(false);
+        });
+        it('should be false if 0 (int)', function () {
+            expect(Utils.isEmpty(0)).to.equal(false);
+        });
+        it('should be false if -1 (int)', function () {
+            expect(Utils.isEmpty(-1)).to.equal(false);
+        });
+        it('should be false if 1.1 (float)', function () {
+            expect(Utils.isEmpty(1.1)).to.equal(false);
+        });
+        it('should be true if NaN', function () {
+            expect(Utils.isEmpty(NaN)).to.equal(true);
+        });
+    });
+    describe('typeOf', function() {
+        it('should be "undefined" if null', function () {
+            expect(Utils.typeOf(null)).to.equal('undefined');
+        });
+        it('should be "undefined" if undefined', function () {
+            expect(Utils.typeOf(undefined)).to.equal('undefined');
+        });
+        it('should be "object" if {}', function () {
+            expect(Utils.typeOf({})).to.equal('object');
+        });
+        it('should be "object" if {a:1}', function () {
+            expect(Utils.typeOf({a:1})).to.equal('object');
+        });
+        it('should be "array" if []', function () {
+            expect(Utils.typeOf([])).to.equal('array');
+        });
+        it('should be "array" if [{}]', function () {
+            expect(Utils.typeOf([{}])).to.equal('array');
+        });
+        it('should be "string" if ""', function () {
+            expect(Utils.typeOf("")).to.equal('string');
+        });
+        it('should be "string" if "aaa"', function () {
+            expect(Utils.typeOf("aaa")).to.equal('string');
+        });
+        it('should be "string" if "1"', function () {
+            expect(Utils.typeOf("1")).to.equal('string');
+        });
+        it('should be "number" if 1', function () {
+            expect(Utils.typeOf(1)).to.equal('number');
+        });
+        it('should be "number" if 0', function () {
+            expect(Utils.typeOf(0)).to.equal('number');
+        });
+        it('should be "number" if -1', function () {
+            expect(Utils.typeOf(-1)).to.equal('number');
+        });
+        it('should be "number" if 1.1', function () {
+            expect(Utils.typeOf(1.1)).to.equal('number');
+        });
+        it('should be "undefined" if NaN', function () {
+            expect(Utils.typeOf(NaN)).to.equal('undefined');
+        });
+        it('should be "boolean" if true', function () {
+            expect(Utils.typeOf(true)).to.equal('boolean');
+        });
+        it('should be "boolean" if false', function () {
+            expect(Utils.typeOf(false)).to.equal('boolean');
+        });
+        it('should be "function" if function(){}', function () {
+            expect(Utils.typeOf(function(){})).to.equal('function');
         });
     });
 })
